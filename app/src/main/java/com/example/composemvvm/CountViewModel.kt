@@ -1,8 +1,9 @@
 package com.example.composemvvm
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
 
-class CountViewModel {
+class CountViewModel : ViewModel() {
 
     val count = mutableStateOf(0)
 
