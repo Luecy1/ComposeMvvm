@@ -1,3 +1,0 @@
-//@HiltAndroidApp
-//class GithubApp : Application() {
-//}

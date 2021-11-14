@@ -1,5 +1,6 @@
 package com.example.github.view
 
+import android.util.Log
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,6 +39,7 @@ fun SearchView(
         )
         Spacer(modifier = Modifier.width(8.dp))
         Button(onClick = {
+            Log.d("@@@", "onclick")
             onSearchButtonTapped()
         }) {
             Text(text = "検索")
