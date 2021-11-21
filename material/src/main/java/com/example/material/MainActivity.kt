@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -15,29 +17,21 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.material.ui.theme.ComposeMvvmTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val selectedItem = mutableStateOf(0)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Scaffold(bottomBar = { BottomBar(selectedItem) }) {
-                when (selectedItem.value) {
-                    0 -> {
-                        Text(text = "0番目")
-                    }
-                    1 -> {
-                        Text(text = "1番目")
-                    }
-                    2 -> {
-                        Text(text = "2番目")
-                    }
-                }
-            }
+            val navController = rememberNavController()
+            Navigation(navController = navController)
         }
     }
 }
@@ -68,6 +62,44 @@ fun BottomBar(selectedItem: MutableState<Int>) {
                 selected = selectedItem.value == index,
                 onClick = { selectedItem.value = index }
             )
+        }
+    }
+}
+
+@Composable
+fun BottomBar() {
+    val selectedItem = remember { mutableStateOf(0) }
+
+    Scaffold(bottomBar = { BottomBar(selectedItem) }) {
+        when (selectedItem.value) {
+            0 -> {
+                Card {
+                    Text("Card Content")
+                }
+            }
+            1 -> {
+                Text(text = "1番目")
+            }
+            2 -> {
+                Text(text = "2番目")
+            }
+        }
+    }
+}
+
+@Composable
+fun Navigation(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = "profile") {
+        composable("profile") {
+            Button(onClick = {
+                navController.navigate("friendslist")
+            }) {
+                Text("Go to Profile")
+            }
+//            BottomBar()
+        }
+        composable("friendslist") {
+            Text("friendslist")
         }
     }
 }
