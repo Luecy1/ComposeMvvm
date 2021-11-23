@@ -1,4 +1,4 @@
-package com.example.material
+package com.example.material.screens
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem

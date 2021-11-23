@@ -15,7 +15,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +23,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.material.screens.BottomBarScreen
+import com.example.material.screens.MyButtonScreen
 import com.example.material.ui.theme.ComposeMvvmTheme
 
 class MainActivity : ComponentActivity() {
@@ -47,8 +48,10 @@ fun MyNavigation(navController: NavHostController) {
                 navController.navigate(route)
             }
         }
-        composable("BottomBar") {
-            BottomBarScreen()
+        SCREENS.values().forEach { screen ->
+            composable(screen.routeName) {
+                screen.transition()
+            }
         }
     }
 }
@@ -67,7 +70,7 @@ fun PageListScreen(
         ) {
             SCREENS.values().forEach { screen ->
                 Text(
-                    text = AnnotatedString(screen.screenName),
+                    text = screen.routeName,
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable {
@@ -92,8 +95,13 @@ fun PageListScreenPreview() {
 }
 
 enum class SCREENS(
-    val screenName: String,
     val routeName: String,
+    val transition: @Composable () -> Unit,
 ) {
-    BOTTOM_BAR("BottomBar", "BottomBar"),
+    BOTTOM_BAR("BottomBar", {
+        BottomBarScreen()
+    }),
+    BUTTON("BUTTON", {
+        MyButtonScreen()
+    }),
 }
