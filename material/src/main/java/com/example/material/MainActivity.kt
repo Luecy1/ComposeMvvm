@@ -3,23 +3,17 @@ package com.example.material
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Divider
-import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
@@ -46,24 +40,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BottomBar(selectedItem: MutableState<Int>) {
-    val items = listOf("Songs", "Artists", "Playlists")
-    val iconList = arrayOf(Icons.Filled.Favorite, Icons.Filled.Star, Icons.Filled.Build)
-
-    BottomNavigation {
-        items.forEachIndexed { index, item ->
-            BottomNavigationItem(
-                icon = { Icon(iconList[index], contentDescription = null) },
-                label = { Text(item) },
-                selected = selectedItem.value == index,
-                onClick = { selectedItem.value = index }
-            )
-        }
-    }
-}
-
-
-@Composable
 fun MyNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "top") {
         composable("top") {
@@ -81,25 +57,29 @@ fun MyNavigation(navController: NavHostController) {
 fun PageListScreen(
     onClick: (String) -> Unit
 ) {
-    Column(
-        Modifier
-            .verticalScroll(rememberScrollState()),
-    ) {
 
-        SCREENS.values().forEach { screen ->
-            ClickableText(
-                text = AnnotatedString(screen.screenName),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(12.dp),
-                onClick = {
-                    onClick(screen.routeName)
-                },
-                style = TextStyle(
-                    fontSize = 24.sp
+    Scaffold(
+        topBar = { TopAppBar(title = { Text(text = "title") }) }
+    ) {
+        Column(
+            Modifier
+                .verticalScroll(rememberScrollState()),
+        ) {
+            SCREENS.values().forEach { screen ->
+                Text(
+                    text = AnnotatedString(screen.screenName),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            onClick(screen.routeName)
+                        }
+                        .padding(12.dp),
+                    style = TextStyle(
+                        fontSize = 24.sp
+                    )
                 )
-            )
-            Divider()
+                Divider()
+            }
         }
     }
 }
