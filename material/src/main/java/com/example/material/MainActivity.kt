@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.material.screens.BottomBarScreen
 import com.example.material.screens.MyButtonScreen
 import com.example.material.screens.MyFloatingActionButton
+import com.example.material.screens.tutorial.Lesson2Screen
 import com.example.material.ui.theme.ComposeMvvmTheme
 
 class MainActivity : ComponentActivity() {
@@ -91,14 +92,16 @@ fun PageListScreen(
 @Preview(showBackground = true)
 @Composable
 fun PageListScreenPreview() {
-    PageListScreen {
-    }
+    PageListScreen {}
 }
 
 enum class SCREENS(
     val routeName: String,
     val transition: @Composable () -> Unit,
 ) {
+    TUTORIAL2("Tutorial2", {
+        Lesson2Screen()
+    }),
     BOTTOM_BAR("BottomBar", {
         BottomBarScreen()
     }),
