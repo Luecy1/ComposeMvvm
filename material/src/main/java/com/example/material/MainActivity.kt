@@ -25,6 +25,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.material.screens.BottomBarScreen
 import com.example.material.screens.MyButtonScreen
+import com.example.material.screens.MyFloatingActionButton
 import com.example.material.ui.theme.ComposeMvvmTheme
 
 class MainActivity : ComponentActivity() {
@@ -101,7 +102,10 @@ enum class SCREENS(
     BOTTOM_BAR("BottomBar", {
         BottomBarScreen()
     }),
-    BUTTON("BUTTON", {
+    BUTTON("Button", {
         MyButtonScreen()
+    }),
+    FLOATING_ACTION_BUTTON("FloatingActionButton", {
+        MyFloatingActionButton()
     }),
 }
