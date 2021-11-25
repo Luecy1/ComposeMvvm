@@ -28,6 +28,7 @@ import com.example.material.screens.MyButtonScreen
 import com.example.material.screens.MyFloatingActionButton
 import com.example.material.screens.tutorial.Lesson2Screen
 import com.example.material.screens.tutorial.Lesson3Screen
+import com.example.material.screens.tutorial.Lesson4Screen
 import com.example.material.ui.theme.ComposeMvvmTheme
 
 class MainActivity : ComponentActivity() {
@@ -105,6 +106,9 @@ enum class SCREENS(
     }),
     TUTORIAL3("Tutorial3", {
         Lesson3Screen()
+    }),
+    TUTORIAL4("Tutorial4", {
+        Lesson4Screen()
     }),
     BOTTOM_BAR("BottomBar", {
         BottomBarScreen()
