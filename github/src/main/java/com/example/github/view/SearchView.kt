@@ -3,6 +3,7 @@ package com.example.github.view
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -24,7 +25,9 @@ fun SearchView(
 ) {
 
     Row(
-        Modifier.fillMaxWidth(),
+        Modifier
+            .padding(12.dp)
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         TextField(
